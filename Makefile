@@ -2,10 +2,10 @@ COMPONENT=SenseC
 BUILD_EXTRA_DEPS += SenseMsg.class HopMsg.class MsgReader.class
 CLEAN_EXTRA = *.class SenseMsg.java HopMsg.java
 
-MsgReader.class: MsgReader.java
-	javac MsgReader.java
 SenseMsg.class: SenseMsg.java
 	javac SenseMsg.java
+MsgReader.class: MsgReader.java SenseMsg.class
+	javac MsgReader.java
 HopMsg.class: HopMsg.java
 	javac HopMsg.java
 

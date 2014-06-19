@@ -1,0 +1,294 @@
+1403166017715: seqnum: 12
+nodeid: 2
+temperature: 29.339999999999996
+humidity: 61.555570048
+light: 0
+
+1403166018685: seqnum: 13
+nodeid: 2
+temperature: 29.35
+humidity: 61.217947680500004
+light: 2
+
+1403166019673: seqnum: 14
+nodeid: 2
+temperature: 29.32
+humidity: 61.002896050000004
+light: 1
+
+1403166020646: seqnum: 15
+nodeid: 2
+temperature: 29.309999999999995
+humidity: 60.879939202
+light: 1
+
+1403166021619: seqnum: 16
+nodeid: 2
+temperature: 29.300000000000004
+humidity: 60.756931298000005
+light: 1
+
+1403166022607: seqnum: 17
+nodeid: 2
+temperature: 29.29
+humidity: 60.572323712
+light: 1
+
+1403166023579: seqnum: 18
+nodeid: 2
+temperature: 29.279999999999994
+humidity: 60.449188168
+light: 0
+
+1403166024552: seqnum: 19
+nodeid: 2
+temperature: 29.279999999999994
+humidity: 60.4183963045
+light: 2
+
+1403166025524: seqnum: 20
+nodeid: 2
+temperature: 29.29
+humidity: 60.6646418645
+light: 0
+
+1403166026497: seqnum: 21
+nodeid: 2
+temperature: 29.639999999999993
+humidity: 63.634119112
+light: 1
+
+1403166027485: seqnum: 22
+nodeid: 2
+temperature: 29.970000000000006
+humidity: 68.61631828450001
+light: 1
+
+1403166028458: seqnum: 23
+nodeid: 2
+temperature: 30.35
+humidity: 73.5410462605
+light: 1
+
+1403166029430: seqnum: 24
+nodeid: 2
+temperature: 30.750000000000007
+humidity: 77.770817408
+light: 3
+
+1403166030403: seqnum: 25
+nodeid: 2
+temperature: 30.979999999999997
+humidity: 81.049183922
+light: 0
+
+1403166031391: seqnum: 26
+nodeid: 2
+temperature: 30.860000000000007
+humidity: 83.041665952
+light: 1
+
+1403166032364: seqnum: 27
+nodeid: 2
+temperature: 30.720000000000006
+humidity: 83.86254211250001
+light: 2
+
+1403166035281: seqnum: 30
+nodeid: 2
+temperature: 30.839999999999996
+humidity: 85.074763648
+light: 8
+
+1403166036269: seqnum: 31
+nodeid: 2
+temperature: 30.96
+humidity: 85.187228488
+light: 7
+
+1403166037258: seqnum: 32
+nodeid: 2
+temperature: 31.059999999999995
+humidity: 85.187228488
+light: 7
+
+1403166038230: seqnum: 33
+nodeid: 2
+temperature: 31.160000000000004
+humidity: 85.074763648
+light: 7
+
+1403166039203: seqnum: 34
+nodeid: 2
+temperature: 31.240000000000002
+humidity: 84.8778273245
+light: 10
+
+1403166040175: seqnum: 35
+nodeid: 2
+temperature: 31.300000000000004
+humidity: 84.6525657805
+light: 0
+
+1403166041148: seqnum: 36
+nodeid: 2
+temperature: 31.190000000000005
+humidity: 83.43828605000002
+light: 2
+
+1403166042136: seqnum: 37
+nodeid: 2
+temperature: 31.130000000000003
+humidity: 81.8195650805
+light: 0
+
+1403166043108: seqnum: 38
+nodeid: 2
+temperature: 31.059999999999995
+humidity: 79.7026009045
+light: 0
+
+1403166044081: seqnum: 39
+nodeid: 2
+temperature: 30.979999999999997
+humidity: 76.901196818
+light: 1
+
+1403166045054: seqnum: 40
+nodeid: 2
+temperature: 30.889999999999993
+humidity: 73.805536672
+light: 1
+
+1403166046026: seqnum: 41
+nodeid: 2
+temperature: 30.79
+humidity: 70.911614018
+light: 1
+
+1403166047014: seqnum: 42
+nodeid: 2
+temperature: 30.71
+humidity: 68.6761756805
+light: 1
+
+1403166047987: seqnum: 43
+nodeid: 2
+temperature: 30.619999999999997
+humidity: 67.025446408
+light: 1
+
+1403166048975: seqnum: 44
+nodeid: 2
+temperature: 30.57
+humidity: 65.516407058
+light: 1
+
+1403166049932: seqnum: 45
+nodeid: 2
+temperature: 30.500000000000007
+humidity: 64.3945820245
+light: 1
+
+1403166050920: seqnum: 46
+nodeid: 2
+temperature: 30.479999999999997
+humidity: 63.938543602
+light: 1
+
+1403166051893: seqnum: 47
+nodeid: 2
+temperature: 30.500000000000007
+humidity: 64.78923456199999
+light: 1
+
+1403166052865: seqnum: 48
+nodeid: 2
+temperature: 30.54
+humidity: 66.3322791125
+light: 1
+
+1403166053838: seqnum: 49
+nodeid: 2
+temperature: 30.580000000000005
+humidity: 67.98704500000001
+light: 1
+
+1403166054810: seqnum: 50
+nodeid: 2
+temperature: 30.57
+humidity: 68.94537600800001
+light: 1
+
+1403166055814: seqnum: 51
+nodeid: 2
+temperature: 30.520000000000003
+humidity: 67.8970339405
+light: 1
+
+1403166056787: seqnum: 52
+nodeid: 2
+temperature: 30.520000000000003
+humidity: 66.8749014605
+light: 1
+
+1403166057760: seqnum: 53
+nodeid: 2
+temperature: 30.500000000000007
+humidity: 65.69791299200001
+light: 1
+
+1403166058716: seqnum: 54
+nodeid: 2
+temperature: 30.490000000000002
+humidity: 64.485703552
+light: 1
+
+1403166059704: seqnum: 55
+nodeid: 2
+temperature: 30.500000000000007
+humidity: 63.42083210449999
+light: 1
+
+1403166060677: seqnum: 56
+nodeid: 2
+temperature: 30.479999999999997
+humidity: 62.566120484500004
+light: 0
+
+1403166061665: seqnum: 57
+nodeid: 2
+temperature: 30.479999999999997
+humidity: 61.923445
+light: 0
+
+1403166062638: seqnum: 58
+nodeid: 2
+temperature: 30.479999999999997
+humidity: 61.4635295125
+light: 1
+
+1403166063610: seqnum: 59
+nodeid: 2
+temperature: 30.470000000000006
+humidity: 60.941424008000006
+light: 3
+
+1403166064583: seqnum: 60
+nodeid: 2
+temperature: 30.46
+humidity: 60.449188168
+light: 1
+
+1403166065555: seqnum: 61
+nodeid: 2
+temperature: 30.46
+humidity: 59.986975160499995
+light: 1
+
+1403166066544: seqnum: 62
+nodeid: 2
+temperature: 30.46
+humidity: 59.585809792000006
+light: 1
+

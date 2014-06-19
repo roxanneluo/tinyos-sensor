@@ -56,6 +56,7 @@ import net.tinyos.message.*;
 import net.tinyos.packet.*;
 import net.tinyos.util.*;
 
+
 public class MsgReader implements net.tinyos.message.MessageListener {
 
   private MoteIF moteIF;
@@ -79,11 +80,24 @@ public class MsgReader implements net.tinyos.message.MessageListener {
   public void messageReceived(int to, Message message) {
     long t = System.currentTimeMillis();
     //    Date d = new Date(t);
-    System.out.print("" + t + ": ");
-    System.out.println(message);
-	out.println(t + ": " + message);
+    String msg =getMsgStr((SenseMsg)message);
+    System.out.print("" + t + ": \n");
+    System.out.println(msg);
+	out.println(t + ": \n" + msg);
 	out.flush();
   }
+    private String getMsgStr(SenseMsg msg) {
+        double d1 = -39.6, d2 = 0.01;
+        double c1 = -2.0468, c2 = 0.0367, c3 = -1.5955E-6;
+        String ans = "seqnum: "+msg.get_seqnum()+"\n";
+        ans += "nodeid: "+msg.get_nodeid()+"\n";
+        ans += "temperature: "+(d1+d2*msg.get_temperature())+"\n";
+        int rawhum = msg.get_humidity();
+        ans += "humidity: "+(c1+c2*rawhum + c3*rawhum*rawhum)+"\n";
+        ans += "light: "+msg.get_light()+"\n";
+        return ans;
+        
+    }
 
   
   private static void usage() {
