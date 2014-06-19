@@ -16,77 +16,80 @@
 
 \title{Netwrok Project Report}
 
-\author{Xuan Luo, Siyi Yang, Haoran Wang 511309077}
+\author{5112409040 Xuan Luo, Siyi Yang, Haoran Wang 511309077}
 
 \maketitle
 
 \begin{abstract}
-In this report, we introduce two network protocols. The first one is the basic broadcasting protocol, which means no matter what packet a \emph{sensor} receives it will broadcast it to neighbors. The second protocol supports routing and forwarding and will update the forwarding table in a fixed time. Besides, we explain the principle and motivation of second protocol prove the robust to temporary interruption. Finally we compare several versions of our protocol.
-
-In other words, our basic method is by broadcasting everything. The extra functions are the second dynamic protocol.
+In the project, we fulfill two network protocols. The first one is the basic broadcasting protocol, which broadcasts the packet to neighbors no matter what packet the \emph{sensor} receives . The second protocol supports routing, and dynamically updates the forwarding table. Besides, we explain the principle and motivation of second protocol, and prove its robustness to position change.
 \end{abstract}
 
-\section{Basic Protocol: Just Broadcast}
-As described in abstract, the first protocol we fulfilled is just broadcasting every packet it receive. We think that this protocol is not efficient enough and didn't keep the routing mechanism. As the idea is simple and not exciting, we will focus our attention on introducing the second protocol. The concrete fulfillment is listed in code.
-
-The rest of report is all about second dynamic protocol.
+\section{Basic Protocol: Naive Broadcast Protocol}
+The first protocol we fulfilled just broadcasts every packet the \emph{sensor} receives. We think this protocol is not efficient enough. It neither keeps the routing mechanism. Since the idea is simple and not exciting, we focus our attention on introducing the second protocol. Our implementation of this protocol resides in the ``broadcast version'' folder. The rest sections are all about second dynamic protocol.
 
 \section{Second Protocol: Dynamic Routing}
-The second protocol supports routing and forwarding between sensors. Besides that, it will adaptively change the routing table according to routing information of adjacent \emph{sensors}.
+The second protocol supports routing and forwarding among sensors. Besides, it also adaptively changes the routing table according to routing information of adjacent \emph{sensors}.
 
+\section{Data Structure On \emph{Sensor}}
+\emph{Sink} is the mote to transfer the received sensed message to the serial port on PC.
+Each \emph{sensor} keeps two routing tuples. Each routing tuple contains two elements, \emph{First Hop} and \emph{Length}. \emph{Length} is the number of hops in shortest path to \emph{sink}, it is set to \emph{Infinity}(which is equal to number of Nodes) if there is no path to \emph{sink}. \emph{First Hop} is the next node in shortest path to \emph{sink}, which is set to 0 if no path exists.
 
-\section{Design \& Main Algorithm}
-There're two main operations in the algorithm.
-\subsection{Data Structure On \emph{Sensor}}
-Each \emph{sensor} keeps two routing tuples. Each routing tuple contains three elements, including  \emph{Reachable}, \emph{Next}, \emph{Distance}. \emph{Reachable} is whether this \emph{sensor} is reachable to \emph{sink}. \emph{Distance} is the least path to \emph{sink}. And \emph{Next} is the next node in the least path to \emph{sink}.
+One of the two tuples is \emph{Current Tuple}, which is determined by \emph{Update} Operation. The other is \emph{Previous Tuple}, which is exactly the \emph{update tuple} before last \emph{Reset}.
 
-One tuple is \emph{Current Tuple}, which is influenced by \emph{Update} Operation, which will be introduced below. One tuple is \emph{Previous Tuple}, which is exact the updated tuple before last \emph{Reset}.
+The reason we don't record the whole routing table is that there is only one destination in this project, which means that we can just record one tuple to single destination.
 
-The reason we didn't record whole routing table is that, there is only one destination in this record, which means that we can just record one tuple, namely the information of the destination.
-
-This design will save more storage space for embedded device.
+This design saves storage space for embedded device.
 
 \section{Forwarding Algorithm}
 We use \emph{Previous Tuple} in forwarding.
 
-Once the sensor receive the data, it will determine whether the data is invalid. The data is invalid to a \emph{sensor} if the data comes from \emph{Next} of \emph{sensor}. It \emph{sensor} receives invalid data, just ignores it. Otherwise, if the data is valid, forwarding to \emph{Next} of \emph{Previous Tuple}.
+Once the sensor receives a packet, it will judge whether the packet is invalid. It is invalid to one \emph{sensor} if the data comes from \emph{First Hop} of the \emph{sensor}. If \emph{sensor} receives invalid data, it just ignores the data. Otherwise, the packet is valid. So the \emph{sensor} forwards packet to \emph{First Hop} of \emph{Previous Tuple}.
 
-The motivation for this judgement on invalid data is that the invalid phenomenon happens when the routing table is not correctly set. By ignoring these packets, we can save precious resources for bettering forwarding correct packet.
+The motivation is that invalid packet exists only when the information routing table is wrong due to the change of position. By ignoring these packets, we can save precious resources for supporting other operations like $Broadcasting$ and $Forwarding$ valid packet.
 
 \section{Routing Algorithm}
 
 \subsection{Relevant Operation}
-Three operations are designed in this algorithm. 
+\ \ \ \ Three operations are designed in this algorithm.
 
-Operation 1: $Reset$ means set evaluate \emph{Previous tuple} with the value of updated tuple. And set the \emph{Current Tuple} initially, which means \emph{Reachable} is false, \emph{Distance} is infinite, \emph{Next} is \emph{null}.
+$Reset$: First, set \emph{Previous tuple} to be the \emph{updated tuple}. Second, set the \emph{Current Tuple} to initial value,namely \emph{Distance} is infinite, \emph{Next} is 0.
 
-Operation 2: $Update$ means that once the \emph{sensor} receives routing tuple from adjacent nodes, it will update its \emph{Current Tuple}. The rule is to choose the least distance path.
+$Update$: Once the \emph{sensor} receives routing tuples from adjacent nodes, it updates its \emph{Current Tuple}. The updating rule is to select the shortest path to \emph{sink} and update both \emph{First Hop} and \emph{Length}.
 
-Operation 3: $Broadcast$ means that broadcast its \emph{Previous Tuple}.
+$Broadcast$: Broadcast its \emph{Previous Tuple}.
 
 \subsection{Description of Algorithm}
-Rule 1:For a fixed time interval, every node, both \emph{sink} and \emph{sensor}, will do \emph{Broadcast}.
+\ \ \ \ Rule-1:For every fixed time(1 second in this protocol), every node, both \emph{sink} and \emph{sensor}, does \emph{Broadcast}.
 
-Rule 2:Every \emph{sensor} do $Reset$ after every two times $Broadcast$.
+Rule-2:Every \emph{sensor} does $Reset$ after every two $Broadcast$,i.e. \emph{sensor} does \emph{Reset} every 2 seconds.
 
-Rule 3:Once a \emph{sensor} receive a routing tuple, do $Update$.
+Rule-3:Once a \emph{sensor} receives a routing tuple, does $Update$.
 
 (The motivation and principle is showed in the proof and next section.)
 
 \subsection{Proof Of Routing Algorithm}
-Once the position between nodes is relatively stable, then the routing table will be ultimately set right.
-\emph{Lemma}: Once the position is stable, if every node in graph has done at least $k+1$ times \emph{reset}, then all the \emph{sensor} which are in $k$ hops close the the sink will set the right routing table. And all the \emph{sensor} that aren't reachable to \emph{sink} within $k$ hops has at least $k+1$ $Distance$. And these two properties still holds in the rest of algorithm.
-\emph{Proof}: Clearly it's true for $k=0$.
-Assume it's true for $k-1$, then for \emph{sensor} that is exactly $k$ hops away from \emph{sink}, after one more $reset$, it will set the right routing table, as all \emph{sensor} with less than or equal $k-1$ distance are correct. For \emph{sensor} that is out of $k$ hops, the distance will be larger than $k$.
+\ \ \ \ \emph{Claim}: Once the position is stable, if every node in graph has done at least $k+1$ \emph{Reset}s, then all the \emph{sensors}, which are $k$ hops away to the sink, will set the routing table, right, i.e. set \emph{Fisrt Hop} ans \emph{Length} in the \emph{Previous Tuple} right. All the \emph{sensor} that aren't reachable to \emph{sink} within $k$ hops has \emph{Length} at least $k+1$ . And these two properties still holds in the rest of algorithm.
+
+The Claim is saying that once the position among nodes is relatively stable, then the routing table will eventually be right.
+
+\emph{Proof of Lemma}: Clearly it's true for $k=0$.
+
+Assume it's true for $k-1$, then for \emph{sensor} that is exactly $k$ hops away from \emph{sink}, after one more $Reset$, it will set the right routing table, as all \emph{sensor} with less than or equal to $k-1$ distance are correct. For \emph{sensor} that is out of $k$ hops, the distance will be larger than $k$.
 
 
-\section{Problem \& Solution}
-\subsection{\emph{Update} happens in the middle between \emph{Reset} and \emph{Broadcast} }
-It will cause the \emph{sensor} broadcasts wrong routing information. The solution is to add \emph{atomic} around \emph{broadcasting} and \emph{clearing}. In this way, we can make sure that the updated routing tuple does broadcast to other nodes.
-\subsection{\emph{Sensor} doesn't receive all adjacent states}
-To guarantee the robustness of our protocol, we must make sure that the routing tuple the \emph{Sensor} \emph{Broadcast} is the tuple that has been \emph{Updated} with every neighbor \emph{Sensor}. If we set the time intervals between every two $Reset$ and $Broadcast$ exactly the same, we might lose some tuple in some interval and receive duplicate tuples in other interval. The solution is do $Broadcast$ in two times speed compare to $Reset$. In this way, we can guarantee the assumption.
 
-\subsection{Poisson Reverse}
-The poisson reverse could not be handled in this protocol. Because \emph{sensor} broadcasts routing information between a fixed interval. Although infinitive count might exist for some time during protocol, it will not influence the frequency of broadcasting and it will disappear once the position is stable.
+\section{Problem \& Solution \& Advantages of our protocol}
+\subsection{\emph{Update} happens between \emph{Reset} and \emph{Broadcast} }
+If \emph{Update} happens between \emph{Reset} and \emph{Broadcast}, the \emph{sensor} can only broadcasts \emph{lengh = Infinity}, and this \emph{Update} is actually missed. The solution is to add \emph{atomic} around \emph{Broadcast} and \emph{Reset}. In this way, we can make sure that the updated routing tuple does broadcast to other nodes.
+
+\subsection{\emph{Sensor} might not receive all adjacent routing tuples}
+To guarantee the robustness of our protocol, we must make sure that the $sensors$ receives all routing tuples from neighbors. If \emph{sensor} does \emph{Reset} and \emph{Broadcast} every 1 seconds, we might lose some tuple in one second and receive duplicate tuples in another second. The solution is to do \emph{Reset} every 2 seconds. In this way, we can \emph{Update} all neighbors' tuples and \emph{Broadcast} before \emph{Reset}, which guarantees the robustness.
+
+\subsection{Count to Infinity}
+We may ignore infinitive count in this protocol. Because \emph{sensor} broadcasts routing information in a fixed time.
+
+In existing algorithm, a \emph{sensor} does \emph{broadcast} every time its routing information changes. If counting to infinity happens, the involved two \emph{sensors} will successively \emph{broadcast}, which badly influence the performance other operations like forwarding on these two \emph{sensors}.
+
+However, in our protocol, it will not influence the frequency of $Broadcast$ as we do it every 1 seconds. What's more, since \emph{Infinity = number of nodes}, the sensors won't count much. 
 
 \end{document}
